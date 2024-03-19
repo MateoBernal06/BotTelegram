@@ -23,7 +23,7 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
     public void onUpdateEventReceived(Update update) {
 
          /*if (getMessageText().equals("/start")) {
-             sendTextMessageAsync("*BIENVENIDO*, ESTE ES MI PRIMER _BOT_  DE TELEGRAM");
+             sendTextMessageAsync("*BIENVENIDO*, ESTE ES MI PRIMER _BOT_  DE TELEGRAM"); //permite mandar un mensaje
 
          }
          else if (getMessageText().contains("Hola")||getMessageText().contains("hola")||getMessageText().contains("Hi")
@@ -38,14 +38,42 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
 
          }*/
 
-        if (getMessageText().equals("/start")) {
-            setUserGlory(0);
+        String boton_jugar= "play_boton";
+        String boton_charlar= "charlar_bot_boton";
+
+        if (getMessageText().equals("/start")){
+
+            sendTextMessageAsync("¿Que quieres hacer el dia de hoy?",Map.of(
+                    "JUGAR",boton_jugar,
+                    "CHARLAR CON EL BOT",boton_charlar)
+            );
+
+        }
+        else if (getCallbackQueryButtonKey().equals(boton_charlar)){
+            sendTextMessageAsync("Hola futuro programador!!");
+            sendTextMessageAsync("Cuentame de ti... :)");
+
+        }
+        else if (getMessageText().contains("Hola")||getMessageText().contains("hola")||getMessageText().contains("Hi")
+                ||getMessageText().contains("hello")||getMessageText().contains("Hello")||getMessageText().contains("hi")){
+            sendTextMessageAsync("¿Cual es tu nombre?");
+
+        }
+        else if (getMessageText().contains("nombre")||getMessageText().contains("llamo")){
+            sendTextMessageAsync("*Hola*, Encantado de conocerte soy *Gato* y este es mi bot");
+
+        }
+        else if (getCallbackQueryButtonKey().equals(boton_jugar)) {
+
+            setUserGlory(0);//contador??
+            sendPhotoMessageAsync("step_1_pic");//permite mandar una imagen
             sendTextMessageAsync(STEP_1_TEXT, Map.of(
-                    "Romper la nevera", "nivel_uno_boton")
+                    "Romper la nevera", "nivel_uno_boton") //crea borones (nombre boton, variable)
             );
 
         } else if (getCallbackQueryButtonKey().equals("nivel_uno_boton")) {
             setUserGlory(30);
+            sendPhotoMessageAsync("step_2_pic");
             sendTextMessageAsync(STEP_2_TEXT, Map.of(
                     "¡Tomar una salchicha! +20 de fama", "nivel_dos_boton",
                     "¡Tomar un pescado! +20 de fama", "nivel_dos_boton",
@@ -54,12 +82,14 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
 
         } else if (getCallbackQueryButtonKey().equals("nivel_dos_boton")) {
             setUserGlory(20);
+            sendPhotoMessageAsync("step_3_pic");
             sendTextMessageAsync(STEP_3_TEXT, Map.of(
                     "Romper al robot aspirador", "nivel_tres_boton")
             );
 
         } else if (getCallbackQueryButtonKey().equals("nivel_tres_boton")) {
             setUserGlory(20);
+            sendPhotoMessageAsync("step_4_pic");
             sendTextMessageAsync(STEP_4_TEXT, Map.of(
                     "Enviar al robot aspirador a por comida! +30 de fama", "nivel_cuatro_boton",
                     "Dar un paseo en el robot aspirador! +30 de fama", "nivel_cuatro_boton",
@@ -68,11 +98,13 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
 
         } else if (getCallbackQueryButtonKey().equals("nivel_cuatro_boton")) {
             setUserGlory(30);
+            sendPhotoMessageAsync("step_5_pic");
             sendTextMessageAsync(STEP_5_TEXT, Map.of(
                     "Encender y ponerse la GoPro!", "nivel_cinco_boton")
             );
 
         } else if (getCallbackQueryButtonKey().equals("nivel_cinco_boton")) {
+            sendPhotoMessageAsync("step_6_pic");
             sendTextMessageAsync(STEP_6_TEXT, Map.of(
                     "¡Correr por los tejados, grabar con la GoPro! +40 de fama", "nivel_seis_boton",
                     "¡Atacar a otros gatos desde tu escondite con la GoPro! +40 de fama", "nivel_seis_boton",
@@ -81,18 +113,21 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
 
         } else if (getCallbackQueryButtonKey().equals("nivel_seis_boton")) {
             setUserGlory(40);
+            sendPhotoMessageAsync("step_7_pic");
             sendTextMessageAsync(STEP_7_TEXT, Map.of(
                     "Romper la contraseña", "nivel_siete_boton")
             );
 
         } else if (getCallbackQueryButtonKey().equals("nivel_siete_boton")) {
             setUserGlory(40);
+            sendPhotoMessageAsync("step_8_pic");
             sendTextMessageAsync(STEP_8_TEXT, Map.of(
                     "Salir al patio", "nivel_ocho_boton")
             );
 
         } else if (getCallbackQueryButtonKey().equals("nivel_ocho_boton")) {
             setUserGlory(50);
+            sendPhotoMessageAsync("final_pic");
             sendTextMessageAsync(FINAL_TEXT);
         }
 
