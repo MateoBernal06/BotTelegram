@@ -17,9 +17,22 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
 
     @Override
     public void onUpdateEventReceived(Update update) {
-       
-        sendTextMessageAsync("Hola mundo");
 
+         if (getMessageText().equals("/start")) {
+             sendTextMessageAsync("*BIENVENIDO*, ESTE ES MI PRIMER _BOT_  DE TELEGRAM");
+
+         }
+         else if (getMessageText().contains("Hola")||getMessageText().contains("hola")||getMessageText().contains("Hi")
+                 ||getMessageText().contains("hello")||getMessageText().contains("Hello")||getMessageText().contains("hi")){
+
+             sendTextMessageAsync("Hola futuro programador");
+             sendTextMessageAsync("¿Cual es tu nombre?");
+
+
+         }else if (getMessageText().contains("nombre")||getMessageText().contains("llamo")){
+            sendTextMessageAsync("*Hola*, Encantado de conocerte soy *Gato* y este es mi bot");
+
+         }
 
     }
 
