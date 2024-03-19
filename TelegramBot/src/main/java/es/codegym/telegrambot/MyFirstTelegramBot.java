@@ -6,6 +6,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+import java.util.Map;
+
+import static es.codegym.telegrambot.TelegramBotContent.*;
+
 public class MyFirstTelegramBot extends MultiSessionTelegramBot {
 
     public static final String NAME = "M_B_primer_bot_bot";
@@ -18,7 +22,7 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
     @Override
     public void onUpdateEventReceived(Update update) {
 
-         if (getMessageText().equals("/start")) {
+         /*if (getMessageText().equals("/start")) {
              sendTextMessageAsync("*BIENVENIDO*, ESTE ES MI PRIMER _BOT_  DE TELEGRAM");
 
          }
@@ -32,7 +36,65 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
          }else if (getMessageText().contains("nombre")||getMessageText().contains("llamo")){
             sendTextMessageAsync("*Hola*, Encantado de conocerte soy *Gato* y este es mi bot");
 
-         }
+         }*/
+
+        if (getMessageText().equals("/start")) {
+            setUserGlory(0);
+            sendTextMessageAsync(STEP_1_TEXT, Map.of(
+                    "Romper la nevera", "nivel_uno_boton")
+            );
+
+        } else if (getCallbackQueryButtonKey().equals("nivel_uno_boton")) {
+            setUserGlory(30);
+            sendTextMessageAsync(STEP_2_TEXT, Map.of(
+                    "¡Tomar una salchicha! +20 de fama", "nivel_dos_boton",
+                    "¡Tomar un pescado! +20 de fama", "nivel_dos_boton",
+                    "¡Tirar una lata de pepinillos! +20 de fama", "nivel_dos_boton")
+            );
+
+        } else if (getCallbackQueryButtonKey().equals("nivel_dos_boton")) {
+            setUserGlory(20);
+            sendTextMessageAsync(STEP_3_TEXT, Map.of(
+                    "Romper al robot aspirador", "nivel_tres_boton")
+            );
+
+        } else if (getCallbackQueryButtonKey().equals("nivel_tres_boton")) {
+            setUserGlory(20);
+            sendTextMessageAsync(STEP_4_TEXT, Map.of(
+                    "Enviar al robot aspirador a por comida! +30 de fama", "nivel_cuatro_boton",
+                    "Dar un paseo en el robot aspirador! +30 de fama", "nivel_cuatro_boton",
+                    "¡Huir del robot aspirador! +30 de fama", "nivel_cuatro_boton")
+            );
+
+        } else if (getCallbackQueryButtonKey().equals("nivel_cuatro_boton")) {
+            setUserGlory(30);
+            sendTextMessageAsync(STEP_5_TEXT, Map.of(
+                    "Encender y ponerse la GoPro!", "nivel_cinco_boton")
+            );
+
+        } else if (getCallbackQueryButtonKey().equals("nivel_cinco_boton")) {
+            sendTextMessageAsync(STEP_6_TEXT, Map.of(
+                    "¡Correr por los tejados, grabar con la GoPro! +40 de fama", "nivel_seis_boton",
+                    "¡Atacar a otros gatos desde tu escondite con la GoPro! +40 de fama", "nivel_seis_boton",
+                    "¡Atacar a los perros desde tu escondite con la GoPro! +40 de fama", "nivel_seis_boton")
+            );
+
+        } else if (getCallbackQueryButtonKey().equals("nivel_seis_boton")) {
+            setUserGlory(40);
+            sendTextMessageAsync(STEP_7_TEXT, Map.of(
+                    "Romper la contraseña", "nivel_siete_boton")
+            );
+
+        } else if (getCallbackQueryButtonKey().equals("nivel_siete_boton")) {
+            setUserGlory(40);
+            sendTextMessageAsync(STEP_8_TEXT, Map.of(
+                    "Salir al patio", "nivel_ocho_boton")
+            );
+
+        } else if (getCallbackQueryButtonKey().equals("nivel_ocho_boton")) {
+            setUserGlory(50);
+            sendTextMessageAsync(FINAL_TEXT);
+        }
 
     }
 
